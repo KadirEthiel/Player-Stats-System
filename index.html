@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Player Stats System</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,28 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 :root{
   --bg:#060810;
-  --surf:#0f1424;
-  --surf2:#121930;
-  --border:rgba(80,110,200,.35);
   --border2:rgba(80,110,200,.18);
   --text:#e4eeff;
   --muted:#6a82b0;
   --muted2:#3d5280;
   --blue:#5584ff;
-  --blue2:#38bdf8;
-  --green:#28d478;
+  --cyan:#38bdf8;
   --red:#ff3d5c;
-  --amber:#ffba30;
   --r:12px;
-  --r2:18px;
   --ease:cubic-bezier(.25,.46,.45,.94);
 }
 
@@ -41,19 +30,24 @@ html,body{
   height:100%;
   overflow:hidden;
   font-family:'Outfit',sans-serif;
-  background:var(--bg);
+  background:#060810;
   color:var(--text);
 }
 
 body{
+  opacity:1;
   background:
     radial-gradient(ellipse 70% 55% at 50% 35%,rgba(85,132,255,.15),transparent 60%),
-    radial-gradient(ellipse 50% 45% at 85% 80%,rgba(255,61,92,.10),transparent 60%),
-    radial-gradient(ellipse 45% 35% at 10% 80%,rgba(56,189,248,.10),transparent 60%),
+    radial-gradient(ellipse 50% 45% at 85% 80%,rgba(255,61,92,.08),transparent 60%),
+    radial-gradient(ellipse 45% 35% at 10% 80%,rgba(56,189,248,.08),transparent 60%),
     linear-gradient(180deg,#050711,#090d18 55%,#04050b);
 }
 
-/* FUNDO ESTILO QUADRA */
+body.z-leaving{
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
 .bg-grid{
   position:fixed;
   inset:0;
@@ -86,14 +80,13 @@ body{
   box-shadow:0 0 30px rgba(85,132,255,.35);
 }
 
-/* REDE */
 .net{
   position:fixed;
   left:8%;
   right:8%;
   top:49%;
   height:86px;
-  opacity:.28;
+  opacity:.25;
   border-top:2px solid rgba(85,132,255,.55);
   border-bottom:2px solid rgba(85,132,255,.22);
   background:
@@ -105,26 +98,6 @@ body{
   mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);
 }
 
-/* PARTÍCULAS */
-.particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 28%,rgba(56,189,248,.8) 0 2px,transparent 3px),
-    radial-gradient(circle at 78% 26%,rgba(255,186,48,.8) 0 2px,transparent 3px),
-    radial-gradient(circle at 88% 68%,rgba(255,61,92,.7) 0 2px,transparent 3px),
-    radial-gradient(circle at 28% 76%,rgba(85,132,255,.8) 0 2px,transparent 3px);
-  opacity:.45;
-  animation:float 5s ease-in-out infinite alternate;
-}
-
-@keyframes float{
-  from{transform:translateY(0)}
-  to{transform:translateY(-12px)}
-}
-
-/* APP */
 .screen{
   position:relative;
   z-index:2;
@@ -151,8 +124,7 @@ body{
   height:46px;
   border-radius:50%;
   border:1px solid rgba(85,132,255,.45);
-  background:
-    radial-gradient(circle at 35% 30%,rgba(56,189,248,.95),rgba(85,132,255,.35) 45%,rgba(5,8,20,.4) 70%);
+  background:radial-gradient(circle at 35% 30%,rgba(56,189,248,.95),rgba(85,132,255,.35) 45%,rgba(5,8,20,.4) 70%);
   box-shadow:0 0 26px rgba(85,132,255,.34);
   position:relative;
 }
@@ -169,10 +141,7 @@ body{
   transform:rotate(-25deg);
 }
 
-.brand-text{
-  display:grid;
-  gap:3px;
-}
+.brand-text{display:grid;gap:3px}
 
 .brand-text b{
   font-family:'Bebas Neue',sans-serif;
@@ -189,13 +158,37 @@ body{
   text-transform:uppercase;
 }
 
+.top-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.update-btn{
+  height:38px;
+  padding:0 15px;
+  border-radius:10px;
+  border:1px solid var(--border2);
+  background:rgba(85,132,255,.06);
+  color:var(--blue);
+  font-family:'DM Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.8px;
+  cursor:pointer;
+}
+
+.update-btn:hover{
+  border-color:rgba(85,132,255,.55);
+  background:rgba(85,132,255,.14);
+}
+
 .version{
   font-family:'DM Mono',monospace;
   font-size:12px;
   color:var(--muted2);
 }
 
-/* CENTRO */
 .hero{
   display:grid;
   place-items:center;
@@ -209,9 +202,7 @@ body{
   background:
     linear-gradient(180deg,rgba(15,20,36,.72),rgba(6,8,16,.50)),
     radial-gradient(circle at 50% 0%,rgba(85,132,255,.15),transparent 55%);
-  box-shadow:
-    0 0 80px rgba(0,0,0,.5),
-    inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow:0 0 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.04);
   padding:46px 44px 38px;
   backdrop-filter:blur(12px);
 }
@@ -221,11 +212,8 @@ body{
   height:118px;
   margin:0 auto 24px;
   border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 30%,#38bdf8,#245cff 48%,#071026 75%);
-  box-shadow:
-    0 0 35px rgba(56,189,248,.48),
-    0 0 80px rgba(85,132,255,.22);
+  background:radial-gradient(circle at 35% 30%,#38bdf8,#245cff 48%,#071026 75%);
+  box-shadow:0 0 35px rgba(56,189,248,.48),0 0 80px rgba(85,132,255,.22);
   position:relative;
   animation:pulse 2.4s ease-in-out infinite;
 }
@@ -253,9 +241,7 @@ body{
   letter-spacing:5px;
   line-height:.9;
   color:#f4f8ff;
-  text-shadow:
-    0 0 12px rgba(85,132,255,.7),
-    0 0 28px rgba(56,189,248,.25);
+  text-shadow:0 0 12px rgba(85,132,255,.7),0 0 28px rgba(56,189,248,.25);
 }
 
 .subtitle{
@@ -263,7 +249,7 @@ body{
   font-family:'DM Mono',monospace;
   font-size:18px;
   letter-spacing:9px;
-  color:var(--blue2);
+  color:var(--cyan);
   text-transform:uppercase;
 }
 
@@ -275,7 +261,6 @@ body{
   line-height:1.6;
 }
 
-/* IDIOMAS PRIORIDADE */
 .lang-title{
   margin-top:34px;
   font-family:'DM Mono',monospace;
@@ -305,17 +290,6 @@ body{
   letter-spacing:1px;
   cursor:pointer;
   transition:.22s var(--ease);
-  position:relative;
-  overflow:hidden;
-}
-
-.lang-btn::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,transparent,rgba(85,132,255,.16),transparent);
-  transform:translateX(-100%);
-  transition:.35s var(--ease);
 }
 
 .lang-btn:hover{
@@ -323,16 +297,6 @@ body{
   border-color:rgba(85,132,255,.7);
   background:rgba(85,132,255,.12);
   box-shadow:0 0 28px rgba(85,132,255,.18);
-}
-
-.lang-btn:hover::before{
-  transform:translateX(100%);
-}
-
-.lang-btn.primary{
-  border-color:rgba(85,132,255,.75);
-  background:rgba(85,132,255,.18);
-  box-shadow:0 0 22px rgba(85,132,255,.15);
 }
 
 .tip{
@@ -356,15 +320,16 @@ body{
   background:rgba(85,132,255,.08);
   display:grid;
   place-items:center;
-  color:var(--blue2);
+  color:var(--cyan);
   font-size:18px;
+  font-weight:800;
 }
 
 .tip b{
   display:block;
   font-family:'DM Mono',monospace;
   font-size:12px;
-  color:var(--blue2);
+  color:var(--cyan);
   margin-bottom:4px;
   letter-spacing:1px;
 }
@@ -374,7 +339,6 @@ body{
   color:var(--muted);
 }
 
-/* FOOTER */
 .footer{
   display:flex;
   justify-content:space-between;
@@ -384,82 +348,136 @@ body{
   color:var(--muted2);
 }
 
-.loading-dots{
+.update-modal{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+  place-items:center;
+  background:rgba(2,4,10,.72);
+  backdrop-filter:blur(10px);
+  padding:22px;
+}
+
+.update-modal.show{display:grid}
+
+.update-card{
+  width:min(720px,94vw);
+  max-height:82vh;
+  overflow:auto;
+  border:1px solid rgba(85,132,255,.28);
+  border-radius:22px;
+  background:
+    linear-gradient(170deg,rgba(18,25,48,.98),rgba(6,8,18,.98)),
+    radial-gradient(circle at 50% 0%,rgba(85,132,255,.18),transparent 55%);
+  box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 40px rgba(85,132,255,.13);
+  padding:26px;
+}
+
+.update-head{
   display:flex;
-  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+  border-bottom:1px solid rgba(80,110,200,.16);
+  padding-bottom:18px;
+  margin-bottom:18px;
+}
+
+.update-head h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px;
+  letter-spacing:2px;
+  line-height:1;
+}
+
+.update-head small{
+  display:block;
+  margin-top:5px;
+  font-family:'DM Mono',monospace;
+  color:var(--blue);
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.close-btn{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  border:1px solid rgba(255,61,92,.24);
+  background:rgba(255,61,92,.08);
+  color:#ff9bad;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.log-section{
+  display:grid;
+  gap:13px;
+}
+
+.log-block{
+  border:1px solid rgba(80,110,200,.16);
+  border-left:3px solid var(--blue);
+  border-radius:14px;
+  background:rgba(4,6,14,.34);
+  padding:15px 17px;
+}
+
+.log-block h3{
+  font-family:'DM Mono',monospace;
+  font-size:14px;
+  color:var(--text);
+  letter-spacing:.8px;
+  margin-bottom:10px;
+}
+
+.log-block ul{
+  list-style:none;
+  display:grid;
   gap:8px;
 }
 
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--blue);
-  opacity:.35;
-  animation:dots 1.2s infinite;
+.log-block li{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+  padding-left:15px;
+  position:relative;
 }
 
-.dot:nth-child(2){animation-delay:.18s}
-.dot:nth-child(3){animation-delay:.36s}
+.log-block li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.65em;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--blue);
+  box-shadow:0 0 10px rgba(85,132,255,.6);
+}
 
-@keyframes dots{
-  0%,100%{opacity:.25;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.35)}
+.log-sub{
+  display:block;
+  margin-top:3px;
+  color:var(--muted2);
+  font-size:13px;
 }
 
 @media(max-width:780px){
-  .screen{
-    padding:24px 18px;
-  }
-
-  .topbar{
-    align-items:flex-start;
-    gap:12px;
-  }
-
-  .brand-text b{
-    font-size:23px;
-  }
-
-  .version{
-    display:none;
-  }
-
-  .hero-card{
-    padding:34px 22px 28px;
-  }
-
-  .main-logo{
-    width:92px;
-    height:92px;
-  }
-
-  .main-logo::before{
-    inset:15px;
-    border-width:8px;
-  }
-
-  .title{
-    font-size:54px;
-    letter-spacing:3px;
-  }
-
-  .subtitle{
-    font-size:13px;
-    letter-spacing:5px;
-  }
-
-  .lang-box{
-    grid-template-columns:1fr;
-  }
-
-  .footer{
-    justify-content:center;
-  }
-
-  .footer span:last-child{
-    display:none;
-  }
+  .screen{padding:24px 18px}
+  .topbar{align-items:flex-start;gap:12px}
+  .brand-text b{font-size:23px}
+  .version{display:none}
+  .hero-card{padding:34px 22px 28px}
+  .main-logo{width:92px;height:92px}
+  .main-logo::before{inset:15px;border-width:8px}
+  .title{font-size:54px;letter-spacing:3px}
+  .subtitle{font-size:13px;letter-spacing:5px}
+  .lang-box{grid-template-columns:1fr}
+  .footer{justify-content:center}
+  .footer span:last-child{display:none}
 }
 </style>
 </head>
@@ -468,7 +486,6 @@ body{
 
 <div class="bg-grid"></div>
 <div class="net"></div>
-<div class="particles"></div>
 
 <div class="screen">
 
@@ -481,7 +498,10 @@ body{
       </div>
     </div>
 
-    <div class="version">VERSÃO 1.0.0</div>
+    <div class="top-actions">
+      <button class="update-btn" onclick="openUpdateLog()">UPDATE LOG</button>
+      <div class="version">VERSÃO 1.0.0</div>
+    </div>
   </header>
 
   <main class="hero">
@@ -499,7 +519,7 @@ body{
 
       <div class="lang-box">
         <button class="lang-btn" onclick="goTo('Stats.html')">ENGLISH</button>
-        <button class="lang-btn primary" onclick="goTo('message.html')">PORTUGUÊS</button>
+        <button class="lang-btn" onclick="goTo('message.html')">PORTUGUÊS</button>
         <button class="lang-btn" onclick="goTo('Estadisticas.html')">ESPAÑOL</button>
       </div>
 
@@ -515,24 +535,100 @@ body{
 
   <footer class="footer">
     <span>Made By ZENOIR and Fuas © 2026</span>
-    <span class="loading-dots">
-      PREPARANDO INTERFACE
-      <i class="dot"></i>
-      <i class="dot"></i>
-      <i class="dot"></i>
-    </span>
+    <span>PREPARANDO INTERFACE</span>
   </footer>
 
 </div>
 
+<div class="update-modal" id="updateModal">
+  <div class="update-card">
+    <div class="update-head">
+      <div>
+        <h2>UPDATE LOG</h2>
+        <small>VERSÃO 1.0.0</small>
+      </div>
+      <button class="close-btn" onclick="closeUpdateLog()">×</button>
+    </div>
+
+    <div class="log-section">
+
+      <div class="log-block">
+        <h3>IDIOMAS</h3>
+        <ul>
+          <li>
+            Escolha de idioma priorizada.
+            <span class="log-sub">O jogador escolhe o idioma logo na tela inicial.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="log-block">
+        <h3>INTERFACE</h3>
+        <ul>
+          <li>
+            Novo visual da tela inicial.
+            <span class="log-sub">Layout mais compatível com o painel principal do Player Stats System.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="log-block">
+        <h3>CORREÇÕES</h3>
+        <ul>
+          <li>
+            Corrigida tela preta ao voltar pelo navegador.
+            <span class="log-sub">A opacidade da página agora é restaurada automaticamente.</span>
+          </li>
+          <li>
+            Removido destaque azul fixo do Português.
+            <span class="log-sub">Todos os idiomas começam neutros e destacam apenas ao passar o mouse.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
+const UPDATE_LOG_VERSION = "1.0.0";
+
+window.addEventListener("pageshow", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+
+  const seen = localStorage.getItem("pss_update_log_seen");
+
+  if(seen !== UPDATE_LOG_VERSION){
+    setTimeout(openUpdateLog, 500);
+  }
+});
+
 function goTo(page){
-  document.body.style.transition = "opacity .25s ease";
-  document.body.style.opacity = "0";
+  document.body.classList.add("z-leaving");
   setTimeout(() => {
     window.location.href = page;
   }, 250);
 }
+
+function openUpdateLog(){
+  document.getElementById("updateModal").classList.add("show");
+  localStorage.setItem("pss_update_log_seen", UPDATE_LOG_VERSION);
+}
+
+function closeUpdateLog(){
+  document.getElementById("updateModal").classList.remove("show");
+  localStorage.setItem("pss_update_log_seen", UPDATE_LOG_VERSION);
+}
+
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") closeUpdateLog();
+});
 </script>
 
 </body>
