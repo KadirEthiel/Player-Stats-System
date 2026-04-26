@@ -1604,6 +1604,17 @@ this._renderFinal();
 }
 }
 new ZenoirApp();
+  window.addEventListener("pageshow", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+  document.body.style.filter = "none";
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+  document.body.style.filter = "none";
+});
 </script>
 </body>
 </html>
