@@ -1240,7 +1240,7 @@ display:flex;flex-direction:column;align-items:center;justify-content:center;gap
   font-size:12px;
 }
 
-@media(min-width:1200px){
+@media(min-width:1200px){<
   .z-teams-wrap{padding:16px;gap:12px;}
   .z-teams-grid{grid-template-columns:repeat(5,1fr);gap:10px;}
   .z-team-card{min-height:82px;padding:12px;}
@@ -1535,11 +1535,23 @@ btn.addEventListener('click',()=>{
 const player=btn.dataset.player;
 this.zOpenFinal=this.zOpenFinal===player?null:player;
 this._renderFinal();
+  
 });
 });
 }
 }
 new ZenoirApp();
+  window.addEventListener("pageshow", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+  document.body.style.filter = "none";
+});
+
+window.addEventListener("load", () => {
+  document.body.classList.remove("z-leaving");
+  document.body.style.opacity = "1";
+  document.body.style.filter = "none";
+});
 </script>
 </body>
 </html>
