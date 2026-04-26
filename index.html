@@ -544,11 +544,21 @@ body.z-leaving{
   <div class="update-card">
     <div class="update-head">
       <div>
-        <h2>UPDATE LOG</h2>
-        <small>VERSÃO 1.0.0</small>
+        <h2 id="logTitle">UPDATE LOG</h2>
+        <small id="logVersion">VERSÃO 1.0.0</small>
       </div>
-      <button class="close-btn" onclick="closeUpdateLog()">×</button>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="update-btn" onclick="setLogLang('pt')">PT</button>
+        <button class="update-btn" onclick="setLogLang('en')">EN</button>
+        <button class="update-btn" onclick="setLogLang('es')">ES</button>
+        <button class="close-btn" onclick="closeUpdateLog()">×</button>
+      </div>
     </div>
+
+    <div class="log-section" id="logContent"></div>
+  </div>
+</div>
 
     <div class="log-section">
 
@@ -591,19 +601,99 @@ body.z-leaving{
 </div>
 
 <script>
-const UPDATE_LOG_VERSION = "1.0.0";
+<script>
+const UPDATE_LOG_VERSION = "1.0.1";
+
+const LOGS = {
+  pt: {
+    title:"UPDATE LOG",
+    version:"VERSÃO 1.0.1",
+    sections:[
+      ["IDIOMAS",[
+        ["Escolha de idioma priorizada","O jogador escolhe o idioma logo na tela inicial."],
+        ["Update Log traduzível","Agora o log pode ser lido em português, inglês e espanhol."]
+      ]],
+      ["INTERFACE",[
+        ["Novo visual da tela inicial","Layout mais compatível com o painel principal."],
+        ["Fundo animado","Adicionado movimento visual para deixar a tela menos parada."]
+      ]],
+      ["CORREÇÕES",[
+        ["Tela preta ao voltar/F5","A opacidade agora é restaurada automaticamente."],
+        ["Português sem destaque fixo","Todos os idiomas começam neutros."]
+      ]]
+    ]
+  },
+  en: {
+    title:"UPDATE LOG",
+    version:"VERSION 1.0.1",
+    sections:[
+      ["LANGUAGES",[
+        ["Language selection prioritized","Players choose the language directly on the start screen."],
+        ["Translatable update log","The log can now be read in Portuguese, English and Spanish."]
+      ]],
+      ["INTERFACE",[
+        ["New start screen design","Layout now matches the main panel better."],
+        ["Animated background","Added motion to make the screen feel more alive."]
+      ]],
+      ["FIXES",[
+        ["Black screen after back/F5","Page opacity is now restored automatically."],
+        ["Portuguese no longer fixed blue","All language buttons start neutral."]
+      ]]
+    ]
+  },
+  es: {
+    title:"REGISTRO DE ACTUALIZACIÓN",
+    version:"VERSIÓN 1.0.1",
+    sections:[
+      ["IDIOMAS",[
+        ["Selección de idioma priorizada","El jugador elige el idioma directamente en la pantalla inicial."],
+        ["Update Log traducible","El registro ahora puede leerse en portugués, inglés y español."]
+      ]],
+      ["INTERFAZ",[
+        ["Nuevo diseño inicial","El layout combina mejor con el panel principal."],
+        ["Fondo animado","Se añadió movimiento visual para dar más vida a la pantalla."]
+      ]],
+      ["CORRECCIONES",[
+        ["Pantalla negra al volver/F5","La opacidad ahora se restaura automáticamente."],
+        ["Portugués sin azul fijo","Todos los botones de idioma empiezan neutros."]
+      ]]
+    ]
+  }
+};
+
+function setLogLang(lang){
+  localStorage.setItem("pss_log_lang", lang);
+  const data = LOGS[lang] || LOGS.pt;
+
+  document.getElementById("logTitle").textContent = data.title;
+  document.getElementById("logVersion").textContent = data.version;
+
+  document.getElementById("logContent").innerHTML = data.sections.map(sec => `
+    <div class="log-block">
+      <h3>${sec[0]}</h3>
+      <ul>
+        ${sec[1].map(item => `
+          <li>${item[0]}<span class="log-sub">${item[1]}</span></li>
+        `).join("")}
+      </ul>
+    </div>
+  `).join("");
+}
 
 window.addEventListener("pageshow", () => {
   document.body.classList.remove("z-leaving");
   document.body.style.opacity = "1";
+  document.body.style.filter = "none";
 });
 
 window.addEventListener("load", () => {
   document.body.classList.remove("z-leaving");
   document.body.style.opacity = "1";
+  document.body.style.filter = "none";
+
+  setLogLang(localStorage.getItem("pss_log_lang") || "pt");
 
   const seen = localStorage.getItem("pss_update_log_seen");
-
   if(seen !== UPDATE_LOG_VERSION){
     setTimeout(openUpdateLog, 500);
   }
@@ -617,6 +707,7 @@ function goTo(page){
 }
 
 function openUpdateLog(){
+  setLogLang(localStorage.getItem("pss_log_lang") || "pt");
   document.getElementById("updateModal").classList.add("show");
   localStorage.setItem("pss_update_log_seen", UPDATE_LOG_VERSION);
 }
@@ -630,6 +721,5 @@ document.addEventListener("keydown", e => {
   if(e.key === "Escape") closeUpdateLog();
 });
 </script>
-
 </body>
 </html>
