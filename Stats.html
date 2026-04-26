@@ -699,73 +699,35 @@ font-size:15px !important;
 .z-team-soon{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; color:#fff; background:rgba(4,7,18,.78); backdrop-filter:blur(5px); opacity:0; transform:scale(.98); transition:opacity .2s var(--ease),transform .2s var(--ease); z-index:3; }
 .z-team-card:hover .z-team-soon{ opacity:1; transform:scale(1); }
 .z-team-card:hover .z-team-name{ opacity:.22; }
-/* FUNDO ANIMADO EXTRA */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 22%,rgba(85,132,255,.16),transparent 26%),
-    radial-gradient(circle at 82% 72%,rgba(255,61,92,.10),transparent 30%),
-    linear-gradient(120deg,transparent,rgba(85,132,255,.04),transparent);
-  animation:z-bg-move 8s ease-in-out infinite alternate;
-}
 
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(85,132,255,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(85,132,255,.045) 1px,transparent 1px);
-  background-size:54px 54px;
-  opacity:.45;
-  animation:z-grid-flow 14s linear infinite;
-}
+/* ZENOIR FIX PACK - fundo animado limpo + anti tela escura + botões bola */
+html,body{opacity:1 !important;filter:none !important;background-color:var(--bg) !important;}
+body{position:relative;isolation:isolate;}
+.z-app{position:relative;z-index:2;}
+.z-bg-aurora,.z-bg-grid,.z-bg-court,.z-bg-orb{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.z-bg-aurora{background:radial-gradient(circle at 15% 18%,rgba(85,132,255,.18),transparent 24%),radial-gradient(circle at 85% 78%,rgba(255,61,92,.12),transparent 28%),radial-gradient(circle at 52% 8%,rgba(40,212,120,.055),transparent 24%),linear-gradient(120deg,transparent,rgba(85,132,255,.045),transparent);animation:z-bg-drift 9s ease-in-out infinite alternate;}
+.z-bg-grid{background-image:linear-gradient(rgba(85,132,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(85,132,255,.045) 1px,transparent 1px);background-size:54px 54px;opacity:.48;animation:z-grid-flow 16s linear infinite;mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.35),transparent 92%);}
+.z-bg-court{inset:auto -10% 0 -10%;height:38%;background:linear-gradient(rgba(85,132,255,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(85,132,255,.11) 1px,transparent 1px);background-size:88px 44px;transform:perspective(780px) rotateX(62deg);transform-origin:bottom;opacity:.27;animation:z-court-glow 5s ease-in-out infinite alternate;}
+.z-bg-orb::before,.z-bg-orb::after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;filter:blur(18px);opacity:.22;}
+.z-bg-orb::before{left:6%;top:26%;background:radial-gradient(circle,rgba(85,132,255,.55),transparent 65%);animation:z-orb-a 10s ease-in-out infinite alternate;}
+.z-bg-orb::after{right:7%;bottom:12%;background:radial-gradient(circle,rgba(255,61,92,.42),transparent 66%);animation:z-orb-b 12s ease-in-out infinite alternate;}
+@keyframes z-bg-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(0,-10px,0) scale(1.035)}}
+@keyframes z-grid-flow{from{background-position:0 0}to{background-position:54px 54px}}
+@keyframes z-court-glow{from{opacity:.18}to{opacity:.34}}
+@keyframes z-orb-a{from{transform:translate(0,0)}to{transform:translate(50px,30px)}}
+@keyframes z-orb-b{from{transform:translate(0,0)}to{transform:translate(-45px,-25px)}}
+.z-counter button{border-radius:50% !important;width:40px !important;min-width:40px !important;height:40px !important;padding:0 !important;overflow:hidden !important;background:radial-gradient(circle at 30% 23%,rgba(255,255,255,.98) 0 8%,rgba(255,255,255,.15) 9% 13%,transparent 14%),conic-gradient(from 25deg,#1d57ff 0 25%,#ffe066 25% 48%,#ffffff 48% 63%,#1d57ff 63% 80%,#ffe066 80% 100%) !important;border:1px solid rgba(255,255,255,.22) !important;box-shadow:inset -6px -8px 12px rgba(0,0,0,.45),inset 4px 4px 10px rgba(255,255,255,.35),0 0 14px rgba(85,132,255,.24) !important;color:#fff !important;text-shadow:0 1px 5px rgba(0,0,0,.95) !important;}
+.z-counter button.z-dec{color:#ff2f5f !important;}
+.z-counter button.z-inc{color:#15ff93 !important;}
+.z-counter button:hover{transform:translateY(-2px) scale(1.08) rotate(10deg) !important;filter:brightness(1.18) saturate(1.08);}
 
-@keyframes z-bg-move{
-  from{filter:brightness(1);transform:scale(1)}
-  to{filter:brightness(1.18);transform:scale(1.04)}
-}
-
-@keyframes z-grid-flow{
-  from{background-position:0 0}
-  to{background-position:54px 54px}
-}
-.z-counter button{
-  border-radius:50% !important;
-  width:40px !important;
-  min-width:40px !important;
-  background:
-    radial-gradient(circle at 32% 25%,#ffffff 0 9%,#ffe066 10% 22%,#245cff 23% 42%,#071a48 43% 70%) !important;
-  border:1px solid rgba(255,255,255,.18) !important;
-  box-shadow:
-    inset -5px -7px 12px rgba(0,0,0,.38),
-    inset 4px 4px 9px rgba(255,255,255,.28),
-    0 0 14px rgba(85,132,255,.20) !important;
-  color:#fff !important;
-  text-shadow:0 1px 4px rgba(0,0,0,.8);
-}
-
-.z-counter button.z-dec{
-  color:#ff3d5c !important;
-}
-
-.z-counter button.z-inc{
-  color:#28d478 !important;
-}
-
-.z-counter button:hover{
-  transform:translateY(-2px) scale(1.08) rotate(8deg) !important;
-  filter:brightness(1.18);
-}
 </style>
 </head>
 <body>
+<div class="z-bg-aurora"></div>
+<div class="z-bg-grid"></div>
+<div class="z-bg-court"></div>
+<div class="z-bg-orb"></div>
 <div class="z-app">
 <div class="z-layout">
 <div class="z-center">
@@ -811,7 +773,7 @@ RESET SET
 <div class="z-legend-item"><div class="z-legend-dot" style="background:#ff7033"></div>Regular (5.0-6.9)</div>
 <div class="z-legend-item"><div class="z-legend-dot" style="background:var(--red)"></div>Bad (&lt;5.0)</div>
 </div>
-<section class="z-info-panel" aria-label="Descrições rápidas dos erros">
+<section class="z-info-panel" aria-label="Quick mistake descriptions">
   <article class="z-info-card z-info-def">
     <strong>Mistake DEF (geral)</strong>
     <small>Point conceded due to a direct defensive error: lack of reaction, incorrect positioning, or misreading of the play.</small>
@@ -847,10 +809,24 @@ RESET SET
 <div class="z-footer"><em style="color:var(--muted2)">Made By</em><em>ZENOIR and Fuas</em><em style="color:var(--muted2)">&copy; 2026</em></div>
 </div>
 <script>
+(function(){
+  const resetVisual = () => {
+    document.body.classList.remove('z-leaving');
+    document.documentElement.style.opacity = '1';
+    document.body.style.opacity = '1';
+    document.documentElement.style.filter = 'none';
+    document.body.style.filter = 'none';
+  };
+  resetVisual();
+  window.addEventListener('pageshow', resetVisual);
+  window.addEventListener('load', resetVisual);
+  window.addEventListener('focus', resetVisual);
+})();
+
 const Z_KEY='zn_v5';
 const Z_UID=()=>Math.random().toString(36).slice(2,8);
 const Z_ROLES=[
-['Oustide','Player1',0,0,0,0],
+['Outside','Player1',0,0,0,0],
 ['Opposite','Player2',0,0,0,0],
 ['Libero','Player3',0,0,0,0],
 ['Ds Spiker','Player4',0,0,0,0],
@@ -858,12 +834,12 @@ const Z_ROLES=[
 ['Setter','Player6',0,0,0,0]
 ];
 const Z_FIELDS={
-'Setter':[['Scored',2],['Offesive Mistake',4],['Defensive Mistake',5]],
-'Ds Tsk':[['Scored',2],['Scored On',3],['Offesive Mistake',4],['Defensive Mistake',5]],
-default:[['Scored',2],['Scored On',3],['Offesive Mistake',4],['Defensive Mistake',5]]
+'Setter':[['Scored',2],['Offensive Mistake',4],['Defensive Mistake',5]],
+'Ds Tsk':[['Scored',2],['Scored On',3],['Offensive Mistake',4],['Defensive Mistake',5]],
+default:[['Scored',2],['Scored On',3],['Offensive Mistake',4],['Defensive Mistake',5]]
 };
 const Z_CSS={
-'Ouside':'outside','Opposite':'opposite','Libero':'libero',
+'Outside':'outside','Opposite':'opposite','Libero':'libero',
 'Ds Spiker':'dsspiker','Ds Tsk':'dstsk','Setter':'setter'
 };
 const Z_TEAM_DATA=[
@@ -1616,17 +1592,6 @@ this._renderFinal();
 }
 }
 new ZenoirApp();
-  window.addEventListener("pageshow", () => {
-  document.body.classList.remove("z-leaving");
-  document.body.style.opacity = "1";
-  document.body.style.filter = "none";
-});
-
-window.addEventListener("load", () => {
-  document.body.classList.remove("z-leaving");
-  document.body.style.opacity = "1";
-  document.body.style.filter = "none";
-});
 </script>
 </body>
 </html>
