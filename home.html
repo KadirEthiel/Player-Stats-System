@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Player Stats System</title>
+
+<!-- 🔤 FUENTE -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- 🔥 ICONOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONDO */
+body {
+    height: 100vh;
+    background: url("background.png") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* OSCURECER */
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* CONTENEDOR */
+.container {
+    position: relative;
+    text-align: center;
+}
+
+/* 🔥 TITULO */
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+
+    color: #38bdf8;
+
+    text-shadow: 
+        0 0 10px #38bdf8,
+        0 0 20px #0ea5e9,
+        0 0 30px rgba(255, 115, 0, 0.6);
+}
+
+/* BOTON FLECHA */
+.start-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 🔥 CONTENEDOR IDIOMAS */
+.lang-container {
+    display: none;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* 🔥 BOTONES ESTILOSOS */
+.lang-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 8px;
+
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+
+    border: 1px solid rgba(56, 189, 248, 0.6);
+
+    backdrop-filter: blur(6px);
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.lang-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+    <div class="title">Player Stats System</div>
+
+    <!-- BOTON INICIAL -->
+    <button class="start-btn" id="startBtn" onclick="mostrarIdiomas()">
+        <i class="fas fa-arrow-right"></i>
+    </button>
+
+    <!-- BOTONES IDIOMA -->
+    <div class="lang-container" id="langBox">
+        <button class="lang-btn" onclick="window.location.href='Stats.html'">English</button>
+        <button class="lang-btn" onclick="window.location.href='message.html'">Português</button>
+        <button class="lang-btn" onclick="window.location.href='Estadisticas.html'">Español</button>
+    </div>
+</div>
+
+<script>
+function mostrarIdiomas() {
+    document.getElementById("startBtn").style.display = "none";
+    document.getElementById("langBox").style.display = "flex";
+}
+
+</script>
+
+</body>
+</html>
