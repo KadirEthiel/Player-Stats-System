@@ -17,7 +17,7 @@
 --green:#28d478;--green-dim:rgba(40,212,120,.12);
 --red:#ff3d5c;--red-dim:rgba(255,61,92,.12);
 --amber:#ffba30;--amber-dim:rgba(255,186,48,.1);
---col-punta:#5584ff;--col-opuestp:#ff7033;--col-libero:#28d478;
+--col-punta:#5584ff;--col-opuesto:#ff7033;--col-libero:#28d478;
 --col-dsspiker:#a166ff;--col-dstsk:#ffba30;--col-colocador:#ff4db8;
 --r:8px;--r2:12px;--r3:18px;
 --ease:cubic-bezier(.25,.46,.45,.94);--spring:cubic-bezier(.34,1.56,.64,1);--snap:cubic-bezier(.16,1,.3,1);
@@ -86,7 +86,7 @@ input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-ou
 .z-pcard:hover{transform:translateY(-2px);border-color:rgba(85,132,255,.22);box-shadow:0 6px 24px rgba(0,0,0,.35)}
 .z-pcard:hover::before{height:4px;opacity:1}
 .z-pcard:active{transform:translateY(-1px) scale(.999);transition-duration:.09s}
-.zr-ponteiro{--col:var(--col-ponteiro)}.zr-oposto{--col:var(--col-oposto)}.zr-libero{--col:var(--col-libero)}.zr-dsspiker{--col:var(--col-dsspiker)}.zr-dstsk{--col:var(--col-dstsk)}.zr-setter{--col:var(--col-setter)}
+.zr-punta{--col:var(--col-punta)}.zr-opuesto{--col:var(--col-opuesto)}.zr-libero{--col:var(--col-libero)}.zr-dsspiker{--col:var(--col-dsspiker)}.zr-dstsk{--col:var(--col-dstsk)}.zr-colocador,.zr-setter{--col:var(--col-colocador)}
 .z-inner{padding:18px 18px 14px;display:grid;gap:12px}
 .z-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .z-field label{display:flex;align-items:center;font-size:12px;color:var(--muted2);text-transform:uppercase;margin-bottom:6px;letter-spacing:1.2px;font-weight:700;line-height:1;transition:color .18s var(--ease)}
@@ -795,15 +795,18 @@ const Z_ROLES=[
 ['Colocador','Jugador 6',0,0,0,0]
 ];
 const Z_FIELDS={
+'Colocador':[['Asistencias',2],['Errores de Colocacion',4],['Intentos de Colocacion',5]],
 'Setter':[['Asistencias',2],['Errores de Colocacion',4],['Intentos de Colocacion',5]],
 'Ds Tsk':[['Asistencias',2],['Intentos de Colocacion',3],['Errores de Colocacion',4]],
 default:[['Puntos de Ataque',2],['Intentos de Ataque',3],['Errores de Ataque',4]],
-'Líbero':[['Defensas',2],['Errores de Recepción',4],['Intentos En Contra',5]]
+'Libero':[['Defensas',2],['Errores de Recepcion',4],['Ataques Recibidos',5]],
+'Líbero':[['Defensas',2],['Errores de Recepcion',4],['Ataques Recibidos',5]]
 };
 const Z_CSS={
-'Punta':'punta','Opuesto':'opuesto','Libero':'libero',
-'Ds Spiker':'dsspiker','Ds Tsk':'dstsk','Setter':'setter'
+'Punta':'punta','Opuesto':'opuesto','Libero':'libero','Líbero':'libero',
+'Ds Spiker':'dsspiker','Ds Tsk':'dstsk','Colocador':'colocador','Setter':'colocador'
 };
+
 const Z_TEAM_DATA=[
 {name:'Akatsuki',tag:'Time',obs:'gradiente vermelho/laranja'},
 {name:'Radiance',tag:'Time',obs:'gradiente ciano/branco'},
@@ -840,53 +843,62 @@ const z_clamp=(z,lo=0,hi=10)=>+Math.max(lo,Math.min(hi,z)).toFixed(1);
 const z_active=z=>!!(+z[2]||+z[3]||+z[4]||+z[5]);
 const z_roleCSS=z=>Z_CSS[z]||z.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,'');
 const z_clone=()=>JSON.parse(JSON.stringify(Z_ROLES));
-const z_rating = z => {
-  const [role, , a, b, c, d] = z.map(Number);
-  if (!z_active(z)) return 0;
-  if (role === 'Setter' || role === 'Ds Tsk') {
-    const assists = a;
-    const attempts = role === 'Setter' ? d : b;
-    const errors = c;
+const z_num=v=>Number(v)||0;
+const z_rating=z=>{
+const role=z[0];
+const stat1=z_num(z[2]);
+const stat2=z_num(z[3]);
+const stat3=z_num(z[4]);
+const stat4=z_num(z[5]);
+if(!z_active(z)) return 0;
 
-    let rating =
-      8.0 +
-      (assists / Math.max(attempts, 1)) * 9 +
-      (assists * 0.18) -
-      (errors * 0.40);
+if(role==='Colocador'||role==='Setter'||role==='Ds Tsk'){
+const asistencias=stat1;
+const intentosSet=(role==='Ds Tsk')?stat2:stat4;
+const erroresSet=stat3;
+return z_clamp(
+8.0+
+(asistencias/Math.max(intentosSet,1))*9+
+(asistencias*0.18)-
+(erroresSet*0.40)
+);
+}
 
-    return z_clamp(rating);
-  }
-  if (role === 'Libero') {
-    const digs = a;
-    const errors = c;
-    const against = d;
+if(role==='Libero'||role==='Líbero'){
+const defensas=stat1;
+const erroresRecepcion=stat3;
+const ataquesRecibidos=stat4;
+return z_clamp(
+7.2+
+(defensas/Math.max(ataquesRecibidos,1))*12+
+(defensas*0.12)-
+(erroresRecepcion*0.45)
+);
+}
 
-    let rating =
-      7.2 +
-      (digs / Math.max(against, 1)) * 12 +
-      (digs * 0.12) -
-      (errors * 0.45);
-
-    return z_clamp(rating);
-  }
-  const kills = a;
-  const attempts = b;
-  const errors = c;
-  let rating =
-    7.0 +
-    ((kills - errors) / Math.max(attempts, 1)) * 10 +
-    (kills * 0.15) -
-    (errors * 0.35);
-  return z_clamp(rating);
+const puntos=stat1;
+const intentosAtaque=stat2;
+const erroresAtaque=stat3;
+return z_clamp(
+7.0+
+((puntos-erroresAtaque)/Math.max(intentosAtaque,1))*10+
+(puntos*0.15)-
+(erroresAtaque*0.35)
+);
 };
 const z_mvp=z=>{
-const[z1,,z2,z3,z4,z5]=z.map(Number);
-const z6=z_rating(z);
+const role=z[0];
+const stat1=z_num(z[2]);
+const stat2=z_num(z[3]);
+const stat3=z_num(z[4]);
+const rating=z_rating(z);
 if(!z_active(z)) return -999;
-if(z1==='Setter') return z6-(z4+z5)*.2;
-if(z1==='Ds Tsk') return z6-z3*.08-(z4+z5)*.12;
-return z6+(z2-z3)*.25+z2*.05-z4*.08-z5*.1;
+if(role==='Colocador'||role==='Setter') return rating-(stat3*.18)+(stat1*.04);
+if(role==='Ds Tsk') return rating-(stat3*.18)+(stat1*.04);
+if(role==='Libero'||role==='Líbero') return rating-(stat3*.18)+(stat1*.04);
+return rating+(stat1-stat3)*.12+stat1*.04;
 };
+
 const z_eff=z=>z_active(z)?Math.round(z_rating(z)*10):0;
 const z_cons=z=>{if(!z_active(z)) return '–';const z1=z_rating(z);if(z1>=8) return 'Alta';if(z1>=5.5) return 'Media';return 'Baja';};
 const z_mkSvg=(z1)=>{
