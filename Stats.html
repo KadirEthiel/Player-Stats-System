@@ -536,18 +536,18 @@ const z_rating=z=>{const role=z[0],a=+z[2]||0,b=+z[3]||0,c=+z[4]||0,d=+z[5]||0;
 const assists=a;
 const attempts=b;
 const errors=d;
-return z_clamp(6.8+(assists/Math.max(attempts,1))*8+(assists*.12)-(errors*.50));
+return z_clamp(6.8+(assists/Math.max(attempts,1))*6+(assists*.10)-(errors*.5));
 }
 if(role==='Libero'||role==='Libero'){
 const digs=a;
 const against=b;
 const errors=d;
-return z_clamp(6.5+(digs/Math.max(against,1))*10+(digs*.10)-(errors*.50));
+return z_clamp(6.5+(digs/Math.max(against,1))*8+(digs*0.08)-(errors*.5));
 }
 const kills=a;
 const attempts=b;
 const errors=c;
-return z_clamp(6.2+((kills-errors)/Math.max(attempts,1))*13+(kills*.10)-(errors*.45));
+return z_clamp(6.2+((kills-errors)/Math.max(attempts,1))*5+(kills*.10)-(errors*.5));
 };
   const z_mvp = z => {
   const role = z[0];
