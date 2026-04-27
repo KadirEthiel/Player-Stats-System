@@ -862,28 +862,23 @@ const z_rating = z => {
     const assists = a;
     const attempts = role === 'Setter' ? d : b;
     const errors = c;
-
     let rating =
       8.0 +
       (assists / Math.max(attempts, 1)) * 9 +
       (assists * 0.18) -
       (errors * 0.40);
-
     return z_clamp(rating);
   }
   if (role === 'Libero') {
     const digs = a;
     const errors = c;
     const against = d;
-
     let rating =
       7.2 +
       (digs / Math.max(against, 1)) * 12 +
       (digs * 0.12) -
-      (errors * 0.45);
-
-    return z_clamp(rating);
-  }
+      (errors * 0.45);return z_clamp(rating);
+}
   const kills = a;
   const attempts = b;
   const errors = c;
