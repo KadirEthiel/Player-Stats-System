@@ -1199,20 +1199,20 @@ REINICIAR SET
 <div class="z-legend-item"><div class="z-legend-dot" style="background:var(--green)"></div>Excelente (9.0+)</div>
 <div class="z-legend-item"><div class="z-legend-dot" style="background:var(--amber)"></div>Bueno (7.0-8.9)</div>
 <div class="z-legend-item"><div class="z-legend-dot" style="background:#ff7033"></div>Regular (5.0-6.9)</div>
-<div class="z-legend-item"><div class="z-legend-dot" style="background:var(--red)"></div>Ruim (&lt;5.0)</div>
+<div class="z-legend-item"><div class="z-legend-dot" style="background:var(--red)"></div>Malo (&lt;5.0)</div>
 </div>
 <section class="z-info-panel" aria-label="Descrições rápidas dos erros">
   <article class="z-info-card z-info-def">
-    <strong>Mistake DEF (geral)</strong>
-    <small>Ponto cedido por erro defensivo direto: falta de reação, posicionamento incorreto ou leitura falha da jogada.</small>
+    <strong>Errores de Ataque (Spikers/TSH)</strong>
+    <small>Acción ofensiva que termina directamente en punto para el rival.</small>
   </article>
   <article class="z-info-card z-info-of">
-    <strong>Mistake OF (spikers)</strong>
-    <small>Erro ofensivo direto: ataque no bloqueio sem necessidade, bola fora ou finalização mal executada.</small>
+    <strong>Errores de Colocacion (Setter/TSK)</strong>
+    <small>Error del colocador al armar la jugada que impide o arruina el ataque y da punto al rival.</small>
   </article>
   <article class="z-info-card z-info-set">
-    <strong>Mistake OF (DS/Setter)</strong>
-    <small>Erro técnico na construção da jogada: levantamento impreciso, set quebrado ou decisão errada.</small>
+    <strong>Errores de Recepcion(DS/Setter)</strong>
+    <small>Error de recepción es cuando fallas en controlar un balón que ERA razonablemente defendible, y eso termina en punto inmediato para el rival.</small>
   </article>
 </section>
 <main class="z-main">
@@ -1248,7 +1248,7 @@ const Z_ROLES=[
 ['Colocador','Player6',0,0,0,0]
 ];
 const Z_FIELDS={
-'Colocador':[['Asistencias',2],['Intentos de Colocacion',4],['Errores de Colocacion',5]],
+'Colocador':[['Asistencias',2],['Intentos de Colocacion',3],['Errores de Colocacion',5]],
 'Ds Tsk':[['Asistencias',2],['Intentos de Colocacion',3],['Errores de Colocacion',5]],
 default:[['Puntos de Ataque',2],['Intentos de Ataque',3],['Errores de Ataque',4]],
 'Libero':[['Defensas',2],['Ataques Recibidos',3],['Errores de Recepcion',5]]
@@ -1344,7 +1344,7 @@ return z_mkSvg('skull');
 const z_rtCls=z=>{if(z>=8) return 'z-rt-g';if(z<4) return 'z-rt-r';return 'z-rt-m'};
 const z_valCls=z=>{if(!z||z<=0)return 'z-val-zero';if(z>=8)return 'z-val-excel';if(z>=7)return 'z-val-good';if(z>=5)return 'z-val-mid';if(z>=4)return 'z-val-low';return 'z-val-bad'};
 const z_effCls=z=>{if(!z||z<=0)return 'z-val-zero';if(z>=80)return 'z-val-excel';if(z>=70)return 'z-val-good';if(z>=50)return 'z-val-mid';if(z>=40)return 'z-val-low';return 'z-val-bad'};
-const z_consCls=z=>z==='Alta'?'z-val-excel':z==='Média'?'z-val-good':z==='Baixa'?'z-val-bad':'z-val-zero';
+const z_consCls=z=>z==='Alta'?'z-val-excel':z==='Media'?'z-val-good':z==='Baja'?'z-val-bad':'z-val-zero';
 
 const Z_HICONS={
 score:`<span class="z-hico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.3" opacity=".75"/></svg></span>`,
