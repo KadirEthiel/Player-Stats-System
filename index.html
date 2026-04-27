@@ -541,18 +541,18 @@ function goTo(page){
 
   let languageText = "";
 
-  if (page === "Stats.html") languageText = "English";
-  else if (page === "message.html") languageText = "Português";
-  else if (page === "Estadisticas.html") languageText = "Español";
+  if (page === "Stats.html") languageText = "ENGLISH";
+  else if (page === "message.html") languageText = "PORTUGUES";
+  else if (page === "Estadisticas.html") languageText = "ESPAÑOL";
 
-  document.getElementById("languageText").innerText =
+  document.getElementById("textoIdioma").innerText =
     "You selected: " + languageText;
 
-  document.getElementById("languageModal").style.display = "flex";
+  document.getElementById("modalIdioma").style.display = "flex";
 }
 
 function closeModal(){
-  document.getElementById("languageModal").style.display = "none";
+  document.getElementById("modalIdioma").style.display = "none";
   destination = null;
 }
 
