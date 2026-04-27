@@ -751,7 +751,7 @@ RESET SET
 </section>
 <section class="z-scores-bar">
 <div class="z-sc z-sc-errors"><svg class="z-summary-ico" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 8v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path><path d="M12 16.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg><div><span>Total Mistakes</span><b id="z-errors">0</b></div></div>
-<div class="z-sc z-sc-rating"><svg class="z-summary-ico z-star" viewBox="0 0 24 24" fill="none"><path d="M12 3.2l2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9L6.6 20l1-6.1-4.4-4.3 6.1-.9L12 3.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg><div><span>Rating Average</span><b id="z-avg">0.0</b></div><div class="z-performance perf-zero"><small>Desempenho</small><strong id="z-perf-label">—</strong><svg class="z-perf-graph" viewBox="0 0 80 32" fill="none"><path class="z-graph-good" d="M4 24c11 0 12-8 22-8s12-7 23-7 14-8 27-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path class="z-graph-mid" d="M4 18c12-4 17 7 27 2s15-1 22-5 12-2 23-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path class="z-graph-bad" d="M4 8c10 4 15-1 24 7s14 2 23 7 14 6 25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><g class="dot-good"><circle cx="4" cy="24" r="2" fill="currentColor"></circle><circle cx="26" cy="16" r="2" fill="currentColor"></circle><circle cx="49" cy="9" r="2" fill="currentColor"></circle><circle cx="76" cy="1" r="2" fill="currentColor"></circle></g><g class="dot-mid"><circle cx="4" cy="18" r="2" fill="currentColor"></circle><circle cx="31" cy="20" r="2" fill="currentColor"></circle><circle cx="53" cy="15" r="2" fill="currentColor"></circle><circle cx="76" cy="8" r="2" fill="currentColor"></circle></g><g class="dot-bad"><circle cx="4" cy="8" r="2" fill="currentColor"></circle><circle cx="28" cy="15" r="2" fill="currentColor"></circle><circle cx="51" cy="22" r="2" fill="currentColor"></circle><circle cx="76" cy="28" r="2" fill="currentColor"></circle></g></svg></div></div>
+<div class="z-sc z-sc-rating"><svg class="z-summary-ico z-star" viewBox="0 0 24 24" fill="none"><path d="M12 3.2l2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9L6.6 20l1-6.1-4.4-4.3 6.1-.9L12 3.2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg><div><span>Rating Average</span><b id="z-avg">0.0</b></div><div class="z-performance perf-zero"><small>Performance</small><strong id="z-perf-label">—</strong><svg class="z-perf-graph" viewBox="0 0 80 32" fill="none"><path class="z-graph-good" d="M4 24c11 0 12-8 22-8s12-7 23-7 14-8 27-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path class="z-graph-mid" d="M4 18c12-4 17 7 27 2s15-1 22-5 12-2 23-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path class="z-graph-bad" d="M4 8c10 4 15-1 24 7s14 2 23 7 14 6 25 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><g class="dot-good"><circle cx="4" cy="24" r="2" fill="currentColor"></circle><circle cx="26" cy="16" r="2" fill="currentColor"></circle><circle cx="49" cy="9" r="2" fill="currentColor"></circle><circle cx="76" cy="1" r="2" fill="currentColor"></circle></g><g class="dot-mid"><circle cx="4" cy="18" r="2" fill="currentColor"></circle><circle cx="31" cy="20" r="2" fill="currentColor"></circle><circle cx="53" cy="15" r="2" fill="currentColor"></circle><circle cx="76" cy="8" r="2" fill="currentColor"></circle></g><g class="dot-bad"><circle cx="4" cy="8" r="2" fill="currentColor"></circle><circle cx="28" cy="15" r="2" fill="currentColor"></circle><circle cx="51" cy="22" r="2" fill="currentColor"></circle><circle cx="76" cy="28" r="2" fill="currentColor"></circle></g></svg></div></div>
 </section>
 <div class="z-legend" id="z-final-legend">
 <div class="z-legend-item"><div class="z-legend-dot" style="background:var(--green)"></div>Excellent (9.0+)</div>
@@ -761,16 +761,16 @@ RESET SET
 </div>
 <section class="z-info-panel" aria-label="Descrições rápidas dos erros">
   <article class="z-info-card z-info-def">
-    <strong>Mistake DEF (geral)</strong>
-    <small>Point conceded due to a direct defensive error: lack of reaction, incorrect positioning, or misreading of the play.</small>
+    <strong>Set Errors (Setter/TSK)</strong>
+    <small>A setter’s mistake that disrupts the play and directly results in a point for the opponent.</small>
   </article>
   <article class="z-info-card z-info-of">
-    <strong>Mistake OF (spikers)</strong>
-    <small>Direct offensive error: unnecessary attack on the block, ball out of bounds, or poorly executed finish.</small>
+    <strong>Attack Errors (Spikers/TSH)</strong>
+    <small>An offensive action that directly results in a point for the opponent.</small>
   </article>
   <article class="z-info-card z-info-set">
-    <strong>Mistake OF (DS/Setter)</strong>
-    <small>Technical error in the build-up: inaccurate set, broken set, or wrong decision.</small>
+    <strong>Reception Errors</strong>
+    <small>A failed reception that directly results in a point for the opponent.</small>
   </article>
 </section>
 <main class="z-main">
