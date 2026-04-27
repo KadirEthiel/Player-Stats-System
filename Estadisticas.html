@@ -1201,7 +1201,7 @@ REINICIAR SET
 <div class="z-legend-item"><div class="z-legend-dot" style="background:#ff7033"></div>Regular (5.0-6.9)</div>
 <div class="z-legend-item"><div class="z-legend-dot" style="background:var(--red)"></div>Malo (&lt;5.0)</div>
 </div>
-<section class="z-info-panel" aria-label="Descrições rápidas dos erros">
+<section class="z-info-panel" aria-label="Descripcion rapida de errores">
   <article class="z-info-card z-info-def">
     <strong>Errores de Ataque (Spikers/TSH)</strong>
     <small>Acción ofensiva que termina directamente en punto para el rival.</small>
@@ -1324,7 +1324,7 @@ if(role==='Ds Tsk') return z6-z3*.08-(z4+z5)*.12;
 return z6+(z2-z3)*.25+z2*.05-z4*.08-z5*.1;
 };
 const z_eff=z=>z_active(z)?Math.round(z_rating(z)*10):0;
-const z_cons=z=>{if(!z_active(z)) return '–';const z1=z_rating(z);if(z1>=8) return 'Alta';if(z1>=5.5) return 'Média';return 'Baixa';};
+const z_cons=z=>{if(!z_active(z)) return '–';const z1=z_rating(z);if(z1>=8) return 'Alta';if(z1>=5.5) return 'Media';return 'Malo';};
 const z_mkSvg=(z1)=>{
 const z2=Z_UID();
 if(z1==='fire') return `<svg class="z-ico" viewBox="0 0 18 18" fill="none"><defs><radialGradient id="za${z2}" cx="50%" cy="80%" r="60%"><stop offset="0%" stop-color="#fff17a"/><stop offset="45%" stop-color="#ff8c00"/><stop offset="100%" stop-color="#c0180a"/></radialGradient><radialGradient id="zb${z2}" cx="50%" cy="90%" r="55%"><stop offset="0%" stop-color="#ffe55a"/><stop offset="100%" stop-color="#ff5500"/></radialGradient></defs><path d="M9 17c-3.6 0-6-2.2-6-5.2 0-2 1.1-3.6 2.3-4.9.4-.5.4.1.4.6 0 .7.2 1.4.7 1.8C7 8.2 7 6.2 8 4.2c.8-1.6 2.2-2.8 2.7-3.2.2-.2.4 0 .4.2-.1 1.4.5 3 1.5 4 .5.5 1.1.9 1.4 1.6.4.9.5 2 .1 3-.3.7-.9 1.3-1 1.4.1-.6 0-1.3-.4-1.7-.1.8-.4 1.6-.9 2.2C11.2 12.4 11 13 11 14c0 .6.1 1.2.4 1.6C10.7 16.5 9.9 17 9 17z" fill="url(#za${z2})"/><path d="M9 15.5c-1.8 0-3-1.2-3-2.8 0-1.1.6-2 1.2-2.7 0 .4.1.8.4 1.1.1-.5.3-1 .6-1.4.5-.7.8-1.6.8-2.4.5.7.8 1.5.8 2.4 0 .5-.1 1-.3 1.4.3-.2.6-.6.7-1 .3.5.5 1.1.5 1.7 0 1.7-1.2 3.7-1.7 3.7z" fill="url(#zb${z2})"/></svg>`;
@@ -1875,7 +1875,7 @@ const z6=z5.reduce((a,b)=>a+b,0)/(z1.filter(z=>z_active(z)).length||1);
 z1.forEach(z=>{
 const z7=z_rating(z);
 const z8=z1.filter(zz=>z_active(zz)).sort((a,b)=>z_mvp(b)-z_mvp(a));
-const z9=z8[0]&&z[1]===z8[0][1]?'mvp':z8[z8.length-1]&&z[1]===z8[z8.length-1][1]?'worst':'';
+const z9=z8[0]&&z[1]===z8[0][1]?'mvp':z8[z8.length-1]&&z[1]===z8[z8.length-1][1]?'peor':'';
 const z10=z7>=8?'rt-g':z7>=7?'rt-y':z7>=5?'rt-o':'rt-r';
 z4+=`<tr class="${z9}"><td>${z[1]}</td><td>${z[0]}</td><td>${z[2]}</td><td>${z[3]}</td><td>${z[4]}</td><td>${z[5]}</td><td class="${z10}">${z7}</td><td>${z_eff(z)}%</td><td>${z_cons(z)}</td></tr>`;
 });
@@ -2031,7 +2031,7 @@ z5.textContent=z1;
 z6.textContent=z4;
 z5.classList.toggle('err-hot', z1 > 10);
 const perf=document.getElementById('z-perf-label');
-if(perf){const n=parseFloat(z4)||0;const box=perf.closest('.z-performance');perf.textContent=n>=8.5?'EXCELENTE':n>=7?'BOM':n>=5?'MÉDIO':n>0?'BAIXO':'—';if(box){box.classList.remove('perf-good','perf-mid','perf-bad','perf-zero');box.classList.add(n>=8.5?'perf-good':n>=5?'perf-mid':n>0?'perf-bad':'perf-zero');}}
+if(perf){const n=parseFloat(z4)||0;const box=perf.closest('.z-performance');perf.textContent=n>=8.5?'EXCELENTE':n>=7?'BOM':n>=5?'MEDIO':n>0?'BAJO':'—';if(box){box.classList.remove('perf-good','perf-mid','perf-bad','perf-zero');box.classList.add(n>=8.5?'perf-good':n>=5?'perf-mid':n>0?'perf-bad':'perf-zero');}}
 this.z4={e:z1,a:z4};
 }
 _setManualScore(idx,val,finalize=false){
