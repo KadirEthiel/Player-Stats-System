@@ -293,6 +293,32 @@ body.z-leaving{opacity:0;transition:opacity .25s ease}
   .lang-box{grid-template-columns:1fr;gap:10px}
   .loading-line{display:none}
 }
+  .modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+}
+
+.botones {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
 </style>
 </head>
 <body>
@@ -508,9 +534,35 @@ function closeUpdateLog(){
   document.getElementById("updateModal").classList.remove("show");
 }
 
+let destination = null;
+
 function goTo(page){
-  document.body.classList.add("z-leaving");
-  setTimeout(() => { window.location.href = page; }, 180);
+  destination = page;
+
+  let languageText = "";
+
+  if (page === "Stats.html") languageText = "English";
+  else if (page === "message.html") languageText = "Português";
+  else if (page === "Estadisticas.html") languageText = "Español";
+
+  document.getElementById("languageText").innerText =
+    "You selected: " + languageText;
+
+  document.getElementById("languageModal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("languageModal").style.display = "none";
+  destination = null;
+}
+
+function confirmLanguage(){
+  if(destination){
+    document.body.classList.add("z-leaving");
+    setTimeout(() => {
+      window.location.href = destination;
+    }, 180);
+  }
 }
 
 document.addEventListener("keydown", e => {
@@ -521,6 +573,16 @@ document.getElementById("updateModal").addEventListener("click", e => {
   if(e.target.id === "updateModal") closeUpdateLog();
 });
 </script>
+<div id="modalIdioma" class="modal">
+  <div class="modal-content">
+    <h2>¿Seguro que quieres escoger este idioma?</h2>
+    <p id="textoIdioma"></p>
 
+    <div class="botones">
+      <button onclick="confirmarIdioma()">Sí</button>
+      <button onclick="cerrarModal()">No</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
