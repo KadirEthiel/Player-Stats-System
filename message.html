@@ -700,35 +700,9 @@ font-size:15px !important;
 .z-team-card:hover .z-team-soon{ opacity:1; transform:scale(1); }
 .z-team-card:hover .z-team-name{ opacity:.22; }
 
-
-/* ZENOIR FIX PACK - fundo animado limpo + anti tela escura + botões bola */
-html,body{opacity:1 !important;filter:none !important;background-color:var(--bg) !important;}
-body{position:relative;isolation:isolate;}
-.z-app{position:relative;z-index:2;}
-.z-bg-aurora,.z-bg-grid,.z-bg-court,.z-bg-orb{position:fixed;inset:0;pointer-events:none;z-index:0;}
-.z-bg-aurora{background:radial-gradient(circle at 15% 18%,rgba(85,132,255,.18),transparent 24%),radial-gradient(circle at 85% 78%,rgba(255,61,92,.12),transparent 28%),radial-gradient(circle at 52% 8%,rgba(40,212,120,.055),transparent 24%),linear-gradient(120deg,transparent,rgba(85,132,255,.045),transparent);animation:z-bg-drift 9s ease-in-out infinite alternate;}
-.z-bg-grid{background-image:linear-gradient(rgba(85,132,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(85,132,255,.045) 1px,transparent 1px);background-size:54px 54px;opacity:.48;animation:z-grid-flow 16s linear infinite;mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.35),transparent 92%);}
-.z-bg-court{inset:auto -10% 0 -10%;height:38%;background:linear-gradient(rgba(85,132,255,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(85,132,255,.11) 1px,transparent 1px);background-size:88px 44px;transform:perspective(780px) rotateX(62deg);transform-origin:bottom;opacity:.27;animation:z-court-glow 5s ease-in-out infinite alternate;}
-.z-bg-orb::before,.z-bg-orb::after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;filter:blur(18px);opacity:.22;}
-.z-bg-orb::before{left:6%;top:26%;background:radial-gradient(circle,rgba(85,132,255,.55),transparent 65%);animation:z-orb-a 10s ease-in-out infinite alternate;}
-.z-bg-orb::after{right:7%;bottom:12%;background:radial-gradient(circle,rgba(255,61,92,.42),transparent 66%);animation:z-orb-b 12s ease-in-out infinite alternate;}
-@keyframes z-bg-drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(0,-10px,0) scale(1.035)}}
-@keyframes z-grid-flow{from{background-position:0 0}to{background-position:54px 54px}}
-@keyframes z-court-glow{from{opacity:.18}to{opacity:.34}}
-@keyframes z-orb-a{from{transform:translate(0,0)}to{transform:translate(50px,30px)}}
-@keyframes z-orb-b{from{transform:translate(0,0)}to{transform:translate(-45px,-25px)}}
-.z-counter button{border-radius:10px !important;width:40px !important;min-width:40px !important;height:40px !important;padding:0 !important;background:rgba(10,14,28,.9) !important;border:1px solid rgba(85,132,255,.2) !important;}
-.z-counter button.z-dec{color:#ff2f5f !important;}
-.z-counter button.z-inc{color:#15ff93 !important;}
-.z-counter button:hover{transform:translateY(-2px) scale(1.05) !important;filter:brightness(1.1);}
-
 </style>
 </head>
 <body>
-<div class="z-bg-aurora"></div>
-<div class="z-bg-grid"></div>
-<div class="z-bg-court"></div>
-<div class="z-bg-orb"></div>
 <div class="z-app">
 <div class="z-layout">
 <div class="z-center">
@@ -810,20 +784,6 @@ RESET SET
 <div class="z-footer"><em style="color:var(--muted2)">Made By</em><em>ZENOIR and Fuas</em><em style="color:var(--muted2)">&copy; 2026</em></div>
 </div>
 <script>
-(function(){
-  const resetVisual = () => {
-    document.body.classList.remove('z-leaving');
-    document.documentElement.style.opacity = '1';
-    document.body.style.opacity = '1';
-    document.documentElement.style.filter = 'none';
-    document.body.style.filter = 'none';
-  };
-  resetVisual();
-  window.addEventListener('pageshow', resetVisual);
-  window.addEventListener('load', resetVisual);
-  window.addEventListener('focus', resetVisual);
-})();
-
 const Z_KEY='zn_v5';
 const Z_UID=()=>Math.random().toString(36).slice(2,8);
 const Z_ROLES=[
@@ -835,9 +795,10 @@ const Z_ROLES=[
 ['Setter','Player6',0,0,0,0]
 ];
 const Z_FIELDS={
-'Setter':[['Pontos Feitos',2],['Erro Ofensivo',4],['Erro Defensivo',5]],
-'Ds Tsk':[['Pontos Feitos',2],['Pontos Tomados',3],['Erro Ofensivo',4],['Erro Defensivo',5]],
-default:[['Pontos Feitos',2],['Pontos Tomados',3],['Erro Ofensivo',4],['Erro Defensivo',5]]
+'Setter':[['Assistências',2],['Tentativas de levantamento',4],['Erros de levantamento',5]],
+'Ds Tsk':[['Assistências',2],['Tentativas de levantamento',3],['Erros de levantamento',5]],
+default:[['Pontos de ataque',2],['Tentativas de ataque',3],['Erros de ataque',4]],
+'Líbero':[['Defesas',2],['Tentativas contra',4],['Erros de recepção',5]]
 };
 const Z_CSS={
 'Ponteiro':'ponteiro','Oposto':'oposto','Líbero':'libero',
