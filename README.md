@@ -2,7 +2,7 @@
 
 Sistema de análise de desempenho para jogadores de vôlei, focado em **scout simples, rápido e justo**.
 
-🔗 Acesse: [Aqui]()
+🔗 Acesse: [Aqui](https://kadirethiel.github.io/Player-Stats-System/)
 
 ---
 
