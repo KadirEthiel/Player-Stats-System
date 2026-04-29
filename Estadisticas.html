@@ -672,11 +672,10 @@ const z_eff = z => {
                                                                                                                                     
                                                                                                                                     
                                                                                                                                    this.z.finalT.querySelectorAll('.z-expand').forEach(btn=>{ btn.addEventListener('click',()=>{ const player=btn.dataset.player; this.zOpenFinal=this.zOpenFinal===player?null:player; this._renderFinal(); });
-function goHome() {
-window.location.href = window.location.origin + "/Player-Stats-System/index.html?t=" + Date.now();
-}                   
+                   
                                                                                                                                                                                              
-  (function(){
+  (
+    function(){
   const DS_OPTS=['Ds Tsk','Ds Akari','DS'];
   let zMenu=null;
 
@@ -722,6 +721,11 @@ window.location.href = window.location.origin + "/Player-Stats-System/index.html
   window.addEventListener('resize',closeMenu);
 })();
                                                                                                                                                                                              }); } } 
+  
+  
+  function goHome() {
+window.location.href = window.location.origin + "/Player-Stats-System/index.html?t=" + Date.now();
+}
   window.zApp = new ZenoirApp();
 </script>
 </body>
