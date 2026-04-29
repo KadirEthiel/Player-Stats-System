@@ -482,11 +482,36 @@ color: white;
 </div>
 
 <script>
-const UPDATE_LOG_VERSION = "1.0.2";
+const UPDATE_LOG_VERSION = "1.0.3";
 
 // UPDATE LOG MANUAL: edite cada linha aqui.
 // Formato: versão > título > função > função da função.
 const UPDATE_LOG_PT = [
+  {
+    version: "VERSÃO 1.0.3",
+    sections: [
+      {
+        title: "PLAYER CARDS",
+        items: [
+          ["DS Role Selector", "The Ds Tsk role now allows switching between Ds Tsk, Ds Akari and DS through a dropdown menu on the card."],
+          ["Adaptive Fields", "When changing the DS role, stat fields automatically update based on the selected type."]
+        ]
+      },
+      {
+        title: "RESPONSIVE",
+        items: [
+          ["Mobile Support", "Interface adapted for screens down to 366×669px with single-column layout and touch-optimized controls."],
+          ["Large Screens", "Improvements for resolutions above 1200px with better use of available space."]
+        ]
+      },
+      {
+        title: "TEAM SELECTION",
+        items: [
+          ["Dropdown Menu", "Pressing TEAM 1 or TEAM 2 opens a menu with all available teams to select from."]
+        ]
+      }
+    ]
+  },
   {
     version: "VERSÃO 1.0.2",
     sections: [
