@@ -497,6 +497,9 @@ REINICIAR SET
 <div class="z-footer"><em style="color:var(--muted2)">Made By</em><em>ZENOIR and Fuas</em><em style="color:var(--muted2)">&copy; 2026</em></div>
 </div>
 <script>
+  window.goHome = function() {
+  window.location.href = window.location.origin + "/Player-Stats-System/index.html?t=" + Date.now();
+};
 const Z_KEY='zn_v5'; const Z_UID=()=>Math.random().toString(36).slice(2,8); 
 const Z_ROLES=[ ['Punto','Jugador1',0,0,0,0], 
                ['Opuesto','Jugador2',0,0,0,0], 
@@ -723,9 +726,7 @@ const z_eff = z => {
                                                                                                                                                                                              }); } } 
   
   
-  function goHome() {
-window.location.href = window.location.origin + "/Player-Stats-System/index.html?t=" + Date.now();
-}
+ 
   window.zApp = new ZenoirApp();
 </script>
 </body>
